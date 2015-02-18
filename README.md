@@ -11,6 +11,8 @@ The directory hierarchy is as follows:
    |
    +-- cdep/             Compiler Dependent Programs.
    |
+   +-- mpis/             MPIs Available.
+   |
    --- mdep/             MPI Dependent Programs.
 ```
 
@@ -26,9 +28,15 @@ The directory hierarchy is as follows:
    This contains sub directories for each compiler (and version). That
    will be appended to the module path when that specific compiler and
    version are loaded. 
+
+4. **MPIs Available**
+   This contains sub directories for each compiler (and version), simillar
+   to `cdep`. However it only contains MPI implementations. So when a user
+   looks for available modules to load it will clearly show the MPIs that
+   are on the system.
    i.e. impi (v5.0.2)
 
-4. **MPI Dependent Programs**
+5. **MPI Dependent Programs**
    This contains sub directories for each mpi implementation and compiler pair.
    i.e. phdf (v1.8.14)
 
