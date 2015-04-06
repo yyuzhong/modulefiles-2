@@ -1,9 +1,6 @@
 -- This module loads the load balancer programs.
 --
 
--- Set the base directory
-local basedir = "/curc/tools/x_86_64/rh6"
-
 -- Local name/vendor and version
 local fname   = myModuleFullName()
 local name    = myModuleName()
@@ -24,6 +21,8 @@ refer to the man page.
 -- We need Slurm
 prereq("slurm")
 
+-- Set the base directory
+local basedir = "/curc/tools/x86_64/rh6/software"
 local root    = pathJoin(basedir, fname)
 
 -- Set the paths needed

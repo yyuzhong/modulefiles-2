@@ -3,12 +3,11 @@
 
 -- Local family and vendor
 local fam = "Compiler"
-local ven = "gnu"
 
--- Local version and sub version
-local ver = "4.9"
-local sub = ".2"
-
+-- Local name/vendor and version
+local fname   = myModuleFullName()
+local name    = myModuleName()
+local version = myModuleVersion()
 
 -- Only one compiler at a time.
 family(fam)
@@ -16,7 +15,7 @@ family(fam)
 -- Whatis and help information
 whatis("Description: GNU: This module loads the GNU Compilers")
 help([[
-This module loads the GNU Compilers version ]] ..ver..sub..[[:
+This module loads the GNU Compilers version ]] ..version..[[:
   C:        gcc
   C++:      g++
   Fortran:  gfortran
@@ -25,15 +24,15 @@ refer to the man page for the individual compilers.
 ]])
 
 -- Set the base directory
-local basedir = "/curc/tools/x_86_64/rh6/gnu/"
+local basedir = "/curc/tools/x86_64/rh6/software"
 
 -- Set the paths needed
-local binpath = pathJoin(basedir, ver .. sub, "/bin")
-local libpath = pathJoin(basedir, ver .. sub, "/lib")
-local l64path = pathJoin(basedir, ver .. sub, "/lib64")
-local incpath = pathJoin(basedir, ver .. sub, "/lib64")
-local manpath = pathJoin(basedir, ver .. sub, "/share/man")
-local pkgpath = pathJoin(basedir, ver .. sub, "/lib/pkgconfig")
+local binpath = pathJoin(basedir, fname, "/bin")
+local libpath = pathJoin(basedir, fname, "/lib")
+local l64path = pathJoin(basedir, fname, "/lib64")
+local incpath = pathJoin(basedir, fname, "/lib64")
+local manpath = pathJoin(basedir, fname, "/share/man")
+local pkgpath = pathJoin(basedir, fname, "/lib/pkgconfig")
 
 
 -- Export path and man paths
@@ -50,9 +49,9 @@ prepend_path("LIBRARY_PATH", l64path)
 
 -- Export the include paths
 prepend_path("CPATH", incpath)
-prepend_path("C_INCLUDE_PATH", incpath)
-prepend_path("CPLUS_INCLUDE_PATH", incpath)
-prepend_path("OBJC_INCLUDE_PATH", incpath)
+
+-- Export the Package config path
+prepend_path("PKG_CONFIG_PATH", pkgpath)
 
 -- Set env vars for the compilers
 pushenv("CC", "gcc")
@@ -61,7 +60,7 @@ pushenv("CXX", "g++")
 
 -- Update the module path to contain the Intel module tree
 local mroot = os.getenv("MODULEPATH_ROOT")
-local mdir  = pathJoin(mroot, "mpis", ven, ver..sub)
-local cdir  = pathJoin(mroot, "cdep", ven, ver..sub)
+local mdir  = pathJoin(mroot, "mpis", fname)
+local cdir  = pathJoin(mroot, "cdep", fname)
 prepend_path("MODULEPATH", mdir)
 prepend_path("MODULEPATH", cdir)
