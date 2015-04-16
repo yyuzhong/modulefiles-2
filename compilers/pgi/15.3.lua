@@ -51,8 +51,9 @@ pushenv("CC",  "pgcc")
 pushenv("FC",  "pgfortran")
 pushenv("F90", "pgf90")
 pushenv("F77", "pgf77")
-pushenv("CPP", "pgprepro")
-pushenv("CXX", "pgcpp")
+pushenv("CXX", "pgc++")
+-- The PGI preprocessor is very finicky
+-- pushenv("CPP", "pgprepro")
 
 -- Set env vars for the license file
 setenv("PGI", pathJoin(basedir, name))
@@ -60,7 +61,7 @@ setenv("LM_LICENSE_FILE",    lm_l)
 
 -- Update the module path to contain the Intel module tree
 local mroot = os.getenv("MODULEPATH_ROOT")
-local cdir  = pathJoin(mroot, "cdep", ven, ver..sub)
-local mdir  = pathJoin(mroot, "mpis", ven, ver..sub)
+local cdir  = pathJoin(mroot, "cdep", fname)
+local mdir  = pathJoin(mroot, "mpis", fname)
 prepend_path("MODULEPATH", cdir)
 prepend_path("MODULEPATH", mdir)

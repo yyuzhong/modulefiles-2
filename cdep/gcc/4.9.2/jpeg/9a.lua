@@ -1,4 +1,3 @@
--- This module loads the Intel Compilers.
 --
 
 -- Set the base directory
@@ -13,8 +12,7 @@ local version = myModuleVersion()
 whatis("Description: jpeglib: This module loads the jpeg library")
 help([[
 This module loads the jpeg library]] ..version..[[:
-For more information please refer to the man page for zlib.
-refer to the man page for the individual compilers. 
+For more information please refer to the man page for jpeglib.
 ]])
 
 -- Figure out our installation root directory
@@ -34,10 +32,6 @@ prepend_path("MANPATH", manpath)
 
 -- Export the run-time library search path
 prepend_path("LD_LIBRARY_PATH", libpath)
-prepend_path("LD_RUN_PATH", libpath)
-
--- Export the link-time library search path
-prepend_path("LIBRARY_PATH", libpath)
 
 -- Export the include paths
 prepend_path("CPATH", incpath)

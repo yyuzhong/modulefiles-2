@@ -1,6 +1,6 @@
 --
 -- Prerequisites
-prereq("szip","openmpi")
+prereq("intel","impi")
 
 -- Local name/vendor and version
 local fname   = myModuleFullName()
@@ -8,11 +8,11 @@ local name    = myModuleName()
 local version = myModuleVersion()
 
 -- Whatis and help information
-whatis("Description: phdf5: This module loads PARALLEL HDF5")
+whatis("Description: boost: This module loads PARALLEL Boost C++ libraries")
 help([[
-This module loads the PARALLEL HDF5 version ]] ..version..[[:
+This module loads the PARALLEL Boost C++ version ]] ..version..[[:
 For more information please refer to the website:
-http://www.hdfgroup.org/
+http://www.boost.org/
 ]])
 
 -- Set the base directory
@@ -24,15 +24,14 @@ local comp    = hierA[1]
 local mpi     = hierA[2]
 local root    = pathJoin(basedir, fname, mpi, comp)
 
-local binpath = pathJoin(root, "bin")
 local libpath = pathJoin(root, "lib")
 local incpath = pathJoin(root, "include")
-
--- Export path and man paths
-prepend_path("PATH",    binpath)
 
 -- Export the run-time library search path
 prepend_path("LD_LIBRARY_PATH", libpath)
 
 -- Export the include paths
 prepend_path("CPATH", incpath)
+
+-- Set the root directory variable
+setenv("BOOST_ROOT", root)

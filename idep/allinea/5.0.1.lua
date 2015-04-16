@@ -15,7 +15,7 @@ local version = myModuleVersion()
 -- Whatis and help information
 whatis("Description: Allinea: This module loads the Allinea tools")
 help([[
-This module loads the Allinea tools version ]] ..version..[[:
+This module loads the Allinea tools version ]] ..version.. [[:
   Debugger:           ddt
   Profiling:          map
 For more information on the individual programs please
@@ -25,7 +25,7 @@ refer to the user guide within the doc directory.
 -- We need Slurm
 prereq("slurm")
 
-local root    = pathJoin(basedir, name, "forge", )
+local root    = pathJoin(basedir, name, "forge", version)
 
 
 -- Set the paths needed

@@ -1,6 +1,7 @@
 --
+
 -- Prerequisites
-prereq("szip","openmpi")
+prereq("szip")
 
 -- Local name/vendor and version
 local fname   = myModuleFullName()
@@ -8,9 +9,9 @@ local name    = myModuleName()
 local version = myModuleVersion()
 
 -- Whatis and help information
-whatis("Description: phdf5: This module loads PARALLEL HDF5")
+whatis("Description: hdf5: This module loads HDF5")
 help([[
-This module loads the PARALLEL HDF5 version ]] ..version..[[:
+This module loads HDF5 version ]] ..version..[[:
 For more information please refer to the website:
 http://www.hdfgroup.org/
 ]])
@@ -19,10 +20,9 @@ http://www.hdfgroup.org/
 local basedir = "/curc/tools/x86_64/rh6/software"
 
 -- Figure out our installation root directory
-local hierA   = hierarchyA(fname,2)
+local hierA   = hierarchyA(fname,1)
 local comp    = hierA[1]
-local mpi     = hierA[2]
-local root    = pathJoin(basedir, fname, mpi, comp)
+local root    = pathJoin(basedir, fname, comp)
 
 local binpath = pathJoin(root, "bin")
 local libpath = pathJoin(root, "lib")
