@@ -1,44 +1,30 @@
 -- This module loads MKL
 --
 
--- Local name/vendor and version
-local fname   = myModuleFullName()
-local name    = myModuleName()
-local version = myModuleVersion()
 
 add_property("arch","mic")
 
--- Whatis and help information
-whatis("Description: mkl: This module loads mkl")
-help([[
-This module loads the Intel Math Kernel Library version ]] ..version..[[:
-For more information please refer to the website:
-https://software.intel.com/en-us/articles/intel-math-kernel-library-documentation/
-]])
-
--- Set the base directory
-local basedir = "/curc/tools/x86_64/rh6/software"
+-- Set the base directory (relative to the software root)
 local comp    = "intel/15.0.2/composer_xe_2015.2.164"
 local mkldir  = "mkl"
 
 -- Figure out our installation root directory
-local root    = pathJoin(basedir, comp, mkldir)
+local root    = pathJoin(comp, mkldir)
 
-local libpath = pathJoin(root, "lib")
-local micpath = pathJoin(root, "lib/mic")
-local incpath = pathJoin(root, "include")
-local clib    = pathJoin(basedir, comp, "lib")
+-- Load the package defaults
+local pkg = loadPkgDefaults(0, root)
+setPkgInfo(pkg)
 
 -- Export the run-time library search path
-prepend_path("LD_LIBRARY_PATH", libpath)
-prepend_path("LD_LIBRARY_PATH", clib)
-prepend_path("MIC_LD_LIBRARY_PATH", micpath)
-
--- Export the include paths
-prepend_path("CPATH", incpath)
+prepend_path("LD_LIBRARY_PATH",     pathJoin(pkg.prefix, "lib", "intel64"))
+prepend_path("LD_LIBRARY_PATH",     pathJoin(pkg.prefix, "..", "compiler", "lib", "intel64"))
+prepend_path("MIC_LD_LIBRARY_PATH", pathJoin(pkg.prefix, "lib", "mic"))
 
 -- MKL specific variables
-setenv("MKLROOT", root)
-setenv("MKL_LP64_ILP64", "lp64")
+setenv("MKLROOT",         root)
+setenv("MKL_LP64_ILP64",  "lp64")
 setenv("MKL_TARGET_ARCH", "intel64")
-setenv("MKL_MIC_ARCH", "mic")
+setenv("MKL_MIC_ARCH",    "mic")
+
+-- Over ride the default lib
+setVarPath(pkg, "LIB", pathJoin(pkg.prefix, "lib", "intel64"))

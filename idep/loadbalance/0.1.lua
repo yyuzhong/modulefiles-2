@@ -1,36 +1,14 @@
 -- This module loads the load balancer programs.
 --
 
--- Local name/vendor and version
-local fname   = myModuleFullName()
-local name    = myModuleName()
-local version = myModuleVersion()
-
--- Whatis and help information
-whatis("Description: loadblance: This module loads the serial load balancer")
-help([[
-This module loads the load balancer version ]] ..version..[[:
-  Executable:         lb
-This program will run multiple serial jobs concurrently
-under MPI.
-
-For more information on the individual programs please
-refer to the man page.
-]])
-
 -- We need Slurm
-prereq("slurm")
+load("slurm")
 
--- Set the base directory
-local basedir = "/curc/tools/x86_64/rh6/software"
-local root    = pathJoin(basedir, fname)
+-- Load the package defaults
+local pkg = loadPkgDefaults(0)
+setPkgInfo(pkg)
 
--- Set the paths needed
-local binpath = pathJoin(root, "/bin")
-local manpath = pathJoin(root, "/man")
-
-
--- Export path and man paths
-prepend_path("PATH",    binpath)
-prepend_path("MANPATH", manpath)
+-- Set the paths
+prepend_path("PATH",            pathJoin(pkg.prefix, "bin"))
+prepend_path("MANPATH",         pathJoin(pkg.prefix, "share/man"))
 
