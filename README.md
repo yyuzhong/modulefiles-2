@@ -13,7 +13,13 @@ The directory hierarchy is as follows:
    |
    +-- mpis/             MPIs Available.
    |
-   --- mdep/             MPI Dependent Programs.
+   +-- mdep/             MPI Dependent Programs.
+   |
+   +-- .site/            Site Specific Configuration.
+   |
+   +-- .info/            Package Default Information.
+   |
+   \-- .data/            Modules Data Cache.
 ```
 
 1. **Independent Applications**
@@ -40,3 +46,38 @@ The directory hierarchy is as follows:
    This contains sub directories for each mpi implementation and compiler pair.
    i.e. phdf (v1.8.14)
 
+6. **Site Specific Configuration**
+   This directory contains the file `SitePackage.lua` which contains the
+   + default specifications for packages 
+   + default `CURC_${PACKAGE}_{ROOT,INC,LIB}` directory settings
+   + logging to syslog on loading a package
+
+7. **Package Default Information**
+   Each package should have a `$package.lua` file that contains the following
+   template (using GCC as an example):
+```
+--
+-- Package defaults
+
+local pkg = {}
+
+pkg.display_name = "GNU Compiler Collection"
+pkg.category     = "development"
+pkg.keywords     = "compiler"
+pkg.url          = "http://gcc.gnu.org/"
+pkg.license      = "GPL"
+pkg.description  = "GNU compiler collection"
+pkg.help         = [[
+This module loads the GNU Compiler collection, providing:
+  C:        gcc
+  C++:      g++
+  Fortran:  gfortran
+For more information on the individual compilers and their suboptions
+refer to the man page for the individual compilers.
+]]
+
+return pkg
+```
+
+8. **Modules Data Cache**
+   This directory contains all the internal lmod cache data. 
