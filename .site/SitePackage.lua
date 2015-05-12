@@ -205,7 +205,7 @@ local function loadPkgDefaults(levels, prefix)
 
    -- Add ROOT, INC and LIB variables
 
-   local p_site = site_name_hook() .."_".. pkg.name .."_"
+   local p_site = site_name_hook() .."_".. pkg.name:gsub("/","_") .."_"
    local p_root = string.upper(p_site .."ROOT")
    local p_lib  = string.upper(p_site .."LIB")
    local p_inc  = string.upper(p_site .."INC")
