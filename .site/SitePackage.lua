@@ -97,6 +97,8 @@ local mapT =
       ['/curc/tools/x86_64/rh6/modules/cdep']                         = "Compiler Dependent Applications",
       ['/curc/tools/x86_64/rh6/modules/mpis']                         = "MPI Implementations",
       ['/curc/tools/x86_64/rh6/modules/mdep']                         = "MPI Dependent Applications"
+      ['/curc/tools/x86_64/rh6/modules/pydep']                        = "Python Packages"
+      ['/curc/tools/x86_64/rh6/modules/rdep']                         = "R Packages"
    },
 }
 
