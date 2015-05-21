@@ -9,7 +9,7 @@ local pkg = loadPkgDefaults(1)
 setPkgInfo(pkg)
 
 -- We need Slurm
-load("slurm")
+always_load("slurm")
 
 -- Set the paths
 prepend_path("PATH",            pathJoin(pkg.prefix, "bin"))

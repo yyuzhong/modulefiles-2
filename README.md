@@ -15,6 +15,10 @@ The directory hierarchy is as follows:
    |
    +-- mdep/             MPI Dependent Programs.
    |
+   +-- pydep/            Python Packages/Modules/Libraries.
+   |
+   +-- rdep/             R Packages/Modules/Libraries.
+   |
    +-- .site/            Site Specific Configuration.
    |
    +-- .info/            Package Default Information.
@@ -46,13 +50,21 @@ The directory hierarchy is as follows:
    This contains sub directories for each mpi implementation and compiler pair.
    i.e. phdf (v1.8.14)
 
-6. **Site Specific Configuration**
+6. ** Python Packages/Modules/Libraries**
+   This directory contains python packages for each python version and compiler pair.
+   i.e. h5py
+ 
+7. ** R Packages/Modules/Libraries**
+   This directory contains R packages for each R version and compiler pair.
+   i.e. netcdf
+
+8. **Site Specific Configuration**
    This directory contains the file `SitePackage.lua` which contains the
    + default specifications for packages 
    + default `CURC_${PACKAGE}_{ROOT,INC,LIB}` directory settings
    + logging to syslog on loading a package
 
-7. **Package Default Information**
+9. **Package Default Information**
    Each package should have a `$package.lua` file that contains the following
    template (using GCC as an example):
 ```
@@ -79,5 +91,5 @@ refer to the man page for the individual compilers.
 return pkg
 ```
 
-8. **Modules Data Cache**
+10. **Modules Data Cache**
    This directory contains all the internal lmod cache data. 

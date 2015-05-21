@@ -1,7 +1,7 @@
 --
 
 -- We need Slurm
-load("slurm")
+always_load("slurm")
 
 -- Local family and vendor
 family("MPI")

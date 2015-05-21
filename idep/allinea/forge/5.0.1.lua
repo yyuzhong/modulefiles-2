@@ -2,7 +2,7 @@
 --
 
 -- We need Slurm
-load("slurm")
+always_load("slurm")
 
 -- We support the Phi
 add_property("arch","mic")
