@@ -50,11 +50,11 @@ The directory hierarchy is as follows:
    This contains sub directories for each mpi implementation and compiler pair.
    i.e. phdf (v1.8.14)
 
-6. ** Python Packages/Modules/Libraries**
+6. **Python Packages/Modules/Libraries**
    This directory contains python packages for each python version and compiler pair.
    i.e. h5py
  
-7. ** R Packages/Modules/Libraries**
+7. **R Packages/Modules/Libraries**
    This directory contains R packages for each R version and compiler pair.
    i.e. netcdf
 
@@ -92,4 +92,4 @@ return pkg
 ```
 
 10. **Modules Data Cache**
-   This directory contains all the internal lmod cache data. 
+    This directory contains all the internal lmod cache data. 
