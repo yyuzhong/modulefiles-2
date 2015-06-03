@@ -77,7 +77,7 @@ function load_hook(t)
    ------------------------------------------------------------------------
    -- Log to syslog
    ------------------------------------------------------------------------
-   local user  = os.getenv("USER")
+   local user  = os.getenv("SLURM_JOB_USER") or os.getenv("USER")
    local jobid = os.getenv("SLURM_JOB_ID") or "unknown"
    local msg   = string.format("user=%s,module=%s,fn=%s,job=%s",
                                user, t.modFullName, t.fn, jobid)
@@ -96,8 +96,8 @@ local mapT =
       ['/curc/tools/x86_64/rh6/modules/compilers']                    = "Compilers",
       ['/curc/tools/x86_64/rh6/modules/cdep']                         = "Compiler Dependent Applications",
       ['/curc/tools/x86_64/rh6/modules/mpis']                         = "MPI Implementations",
-      ['/curc/tools/x86_64/rh6/modules/mdep']                         = "MPI Dependent Applications"
-      ['/curc/tools/x86_64/rh6/modules/pydep']                        = "Python Packages"
+      ['/curc/tools/x86_64/rh6/modules/mdep']                         = "MPI Dependent Applications",
+      ['/curc/tools/x86_64/rh6/modules/pydep']                        = "Python Packages",
       ['/curc/tools/x86_64/rh6/modules/rdep']                         = "R Packages"
    },
 }
@@ -124,16 +124,20 @@ function avail_hook(t)
 end
 
 ------------------------------------------------------------------------
--- Site name hook for env vars
-------------------------------------------------------------------------
-local function site_name_hook()
-   return "CURC"
-end
-
-------------------------------------------------------------------------
 -- Load package defaults
+--
+-- Input arguments are:
+-- 1) level		The level that the package sites at, for example
+--              0 - Independent Programs and Compilers
+--              1 - Compiler dependent programs
+--              2 - Compiler and MPI (or R or Python or ...) programs
+-- 2) prefix    A package prefix, if it is different from the default.
+--              This can be absolute or relative to SiteRootDir
+-- 3) parent    If this package belongs to a encompassing program,
+--              for example Rmpi belongs to R. This allows for the 
+--              info file to exist in a subdirectory.
 ------------------------------------------------------------------------
-local function loadPkgDefaults(levels, prefix)
+local function loadPkgDefaults(levels, prefix, parent)
    local pkg = {}
    local status
    local msg
@@ -157,10 +161,8 @@ local function loadPkgDefaults(levels, prefix)
    -- Build package prefix from modulefile location
    local hierA      = hierarchyA(pkg.id, levels)
    local a          = {}
-   -- a[#a+1]          = SiteRootDir
    a[#a+1]          = pkg.id
    for i = levels,1,-1 do
-      -- a[#a+1] = hierA[i]:gsub("/","-"):gsub("%.","_")
       a[#a+1] = hierA[i]
    end
    pkg.prefix       = pathJoin(SiteRootDir, unpack(a))
@@ -176,9 +178,18 @@ local function loadPkgDefaults(levels, prefix)
       end
    end
    
+	pkgDesc(pkg)
+	pkgVars(pkg)
+	return pkg
+end
+
+------------------------------------------------------------------------
+-- Set the package description
+------------------------------------------------------------------------
+function pkgDesc(pkg, parent)
    ------------------------------------------------------------
    -- Read default package description file
-   local fn         = pathJoin(InfoDir, pkg.name .. ".lua")
+   local fn         = pathJoin(InfoDir, parent, pkg.name .. ".lua")
    local f          = io.open(fn)
    local whole      = false
    local status     = false
@@ -204,10 +215,23 @@ local function loadPkgDefaults(levels, prefix)
    for k,v in pairs(msg) do
     pkg[k] = v
    end
+end
 
-   -- Add ROOT, INC and LIB variables
+------------------------------------------------------------------------
+-- Site name hook for env vars
+------------------------------------------------------------------------
+local function site_name_hook()
+   return "CURC"
+end
 
-   local p_site = site_name_hook() .."_".. pkg.name:gsub("/","_") .."_"
+------------------------------------------------------------------------
+-- Add ROOT, INC and LIB variables
+------------------------------------------------------------------------
+function pkgVars(pkg)
+
+   local p_site = site_name_hook() .."_"
+                  .. pkg.name:gsub("%S",{["/"] = "_", ["."] = "_"})
+                  .. "_"
    local p_root = string.upper(p_site .."ROOT")
    local p_lib  = string.upper(p_site .."LIB")
    local p_inc  = string.upper(p_site .."INC")
@@ -226,7 +250,6 @@ local function loadPkgDefaults(levels, prefix)
      setenv(p_inc, i_dir)
    end 
 
-   return pkg
 end
 
 ------------------------------------------------------------------------
