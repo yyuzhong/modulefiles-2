@@ -178,7 +178,7 @@ local function loadPkgDefaults(levels, prefix, parent)
       end
    end
    
-	pkgDesc(pkg)
+	pkgDesc(pkg, parent)
 	pkgVars(pkg)
 	return pkg
 end
@@ -194,6 +194,7 @@ function pkgDesc(pkg, parent)
    local whole      = false
    local status     = false
    local msg        = "Empty file"
+
    if (f) then
      whole = f:read("*all")
      f:close()
@@ -208,12 +209,12 @@ function pkgDesc(pkg, parent)
    end
    
    if (not status) then
-     LmodError("Please report to rcops the error:\n",
+     LmodError("Please report to rc-help the error:\n",
                "Unable to load file: ", fn, ": ", msg, "\n")
    end
    
    for k,v in pairs(msg) do
-    pkg[k] = v
+     pkg[k] = v
    end
 end
 
