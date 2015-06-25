@@ -4,5 +4,5 @@
 local pkg = loadPkgDefaults(2, '', true)
 setPkgInfo(pkg)
 
-prepend_path("R_LIBS", pathJoin(pkg.prefix))
+prepend_path("PYTHONPATH", pathJoin(pkg.prefix, "lib/python2.7/site-packages"))
 

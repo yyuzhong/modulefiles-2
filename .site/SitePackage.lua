@@ -137,12 +137,14 @@ end
 --              for example Rmpi belongs to R. This allows for the 
 --              info file to exist in a subdirectory.
 ------------------------------------------------------------------------
-local function loadPkgDefaults(levels, prefix, parent)
+local function loadPkgDefaults(levels, prefix, sub_pkg)
    local pkg = {}
    local status
    local msg
    local whole
    local unpack = (_VERSION == "Lua 5.1") and unpack or table.unpack
+   local p_nam
+   local p_ver
    
    ------------------------------------------------------------
    -- Fill default values
@@ -159,11 +161,21 @@ local function loadPkgDefaults(levels, prefix, parent)
    
    ------------------------------------------------------------
    -- Build package prefix from modulefile location
+   -- hierarchyA() returns a dependency list of 
+   --              the package.
+   --              i.e. parallel HDF5 would have:
+   --              gcc/5.1.0, openmpi/1.8.5
    local hierA      = hierarchyA(pkg.id, levels)
+
+   -- We want to add our package and version,
+   -- then reverse this dependency list.
    local a          = {}
-   a[#a+1]          = pkg.id
+   a[#a+1]          = pkg.name
+   a[#a+1]          = pkg.version
    for i = levels,1,-1 do
-      a[#a+1] = hierA[i]
+      for v in hierA[i]:split("/") do
+         a[#a+1] = v
+      end
    end
    pkg.prefix       = pathJoin(SiteRootDir, unpack(a))
    pkg.modpath      = pathJoin(unpack(a))
@@ -177,8 +189,19 @@ local function loadPkgDefaults(levels, prefix, parent)
          pkg.prefix = pathJoin(SiteRootDir, prefix)
       end
    end
+
+   ------------------------------------------------------------
+   -- If we are a sub package (i.e. numpy)
+   if sub_pkg then
+      table.remove(a,1) -- remove package name
+      table.remove(a,1) -- remove package version
+      p_nam = table.remove(a,1) -- parent's name
+      p_ver = table.remove(a,1) -- parent's version
+      local rest  = pathJoin(unpack(a))
+      pkg.prefix = pathJoin(SiteRootDir, p_nam .."_packages", p_ver, rest, pkg.id)
+   end
    
-	pkgDesc(pkg, parent)
+	pkgDesc(pkg, p_nam)
 	pkgVars(pkg)
 	return pkg
 end
@@ -231,7 +254,7 @@ end
 function pkgVars(pkg)
 
    local p_site = site_name_hook() .."_"
-                  .. pkg.name:gsub("%S",{["/"] = "_", ["."] = "_"})
+                  .. pkg.name:gsub("%S",{["/"] = "_", ["."] = "_", ["-"] = "_"})
                   .. "_"
    local p_root = string.upper(p_site .."ROOT")
    local p_lib  = string.upper(p_site .."LIB")

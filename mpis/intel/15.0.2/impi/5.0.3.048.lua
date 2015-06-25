@@ -1,13 +1,13 @@
 --
 
 -- We need Slurm
-always_load("slurm")
+--always_load("slurm")
 
 -- Local family and vendor
 family("MPI")
 
 ---- Load the package defaults
-local pkg = loadPkgDefaults(0)
+local pkg = loadPkgDefaults(1, 'impi/5.0.3.048')
 setPkgInfo(pkg)
 
 prepend_path("PATH",            pathJoin(pkg.prefix, "bin64"))
