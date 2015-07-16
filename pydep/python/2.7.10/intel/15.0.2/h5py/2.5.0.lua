@@ -1,4 +1,6 @@
 --
+
+load('hdf5')
 load('numpy')
 
 -- Load the package defaults

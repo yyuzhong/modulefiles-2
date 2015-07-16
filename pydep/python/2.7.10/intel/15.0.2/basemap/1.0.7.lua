@@ -1,5 +1,8 @@
 --
+
+load('geos')
 load('numpy')
+load('matplotlib')
 
 -- Load the package defaults
 local pkg = loadPkgDefaults(2, '', true)

@@ -1,4 +1,7 @@
 --
+
+load('mkl')
+load('cython')
 load('numpy')
 
 -- Load the package defaults

@@ -10,4 +10,5 @@ prepend_path("MANPATH",         pathJoin(pkg.prefix, "share/man"))
 prepend_path("LD_LIBRARY_PATH", pathJoin(pkg.prefix, "lib"))
 prepend_path("PKG_CONFIG_PATH", pathJoin(pkg.prefix, "lib/pkgconfig"))
 
+set_alias("python", "python3")
 prependModulePath(pathJoin("pydep", pkg.modpath))

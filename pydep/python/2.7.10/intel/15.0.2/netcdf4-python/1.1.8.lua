@@ -1,5 +1,7 @@
 --
-load('numpy')
+
+load('h5py')
+load('netcdf')
 
 -- Load the package defaults
 local pkg = loadPkgDefaults(2, '', true)

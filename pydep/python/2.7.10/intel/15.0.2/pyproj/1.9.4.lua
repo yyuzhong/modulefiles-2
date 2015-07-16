@@ -1,5 +1,6 @@
 --
-load('numpy')
+
+load('proj')
 
 -- Load the package defaults
 local pkg = loadPkgDefaults(2, '', true)

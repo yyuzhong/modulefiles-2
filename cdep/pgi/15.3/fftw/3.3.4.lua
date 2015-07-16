@@ -1,6 +1,6 @@
 --
 
-load('mkl')
+conflict("fftw")
 
 -- Load the package defaults
 local pkg = loadPkgDefaults(1)
@@ -12,4 +12,3 @@ prepend_path("MANPATH",         pathJoin(pkg.prefix, "share/man"))
 prepend_path("LD_LIBRARY_PATH", pathJoin(pkg.prefix, "lib"))
 prepend_path("PKG_CONFIG_PATH", pathJoin(pkg.prefix, "lib/pkgconfig"))
 
-prependModulePath(pathJoin("pydep", pkg.modpath))
