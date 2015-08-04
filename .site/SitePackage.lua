@@ -98,7 +98,7 @@ local mapT =
       ['/curc/tools/x86_64/rh6/modules/mpis']                         = "MPI Implementations",
       ['/curc/tools/x86_64/rh6/modules/mdep']                         = "MPI Dependent Applications",
       ['/curc/tools/x86_64/rh6/modules/pydep']                        = "Python Packages",
-      ['/curc/tools/x86_64/rh6/modules/rdep']                         = "R Packages"
+      ['/curc/tools/x86_64/rh6/modules/rdep']                         = "R Packages",
    },
 }
 
@@ -231,14 +231,16 @@ function pkgDesc(pkg, parent)
      status, msg = sandbox_run(whole)
    end
    
-   if (not status) then
-     LmodError("Please report to rc-help the error:\n",
-               "Unable to load file: ", fn, ": ", msg, "\n")
-   end
+   --if (not status) then
+   --  LmodError("Please report to rc-help the error:\n",
+   --            "Unable to load file: ", fn, ": ", msg, "\n")
+   --end
    
-   for k,v in pairs(msg) do
-     pkg[k] = v
-   end
+--   if (status) then 
+     for k,v in pairs(msg) do
+       pkg[k] = v
+     end
+   -- end
 end
 
 ------------------------------------------------------------------------
