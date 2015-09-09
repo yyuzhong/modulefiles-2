@@ -8,7 +8,7 @@ pkg.category     = "development"
 pkg.keywords     = "language"
 pkg.url          = "https://github.com/jswhit/pygrib"
 pkg.license      = "BSD"
-pkg.description  = "Python Programming Language"
+pkg.description  = "Python Module"
 pkg.help         = [[
 Python module for reading and writing GRIB files (edition 1 and edition
 2).

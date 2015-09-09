@@ -8,7 +8,7 @@ pkg.category     = "development"
 pkg.keywords     = "language"
 pkg.url          = "https://github.com/pydata/patsy"
 pkg.license      = "MIT"
-pkg.description  = "Python Programming Language"
+pkg.description  = "Python Module"
 pkg.help         = [[
 Patsy is a Python library for describing statistical models (especially
 linear models, or models that have a linear component) and building design

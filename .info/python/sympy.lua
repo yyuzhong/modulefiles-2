@@ -8,7 +8,7 @@ pkg.category     = "development"
 pkg.keywords     = "language"
 pkg.url          = "http://www.sympy.org/"
 pkg.license      = "BSD"
-pkg.description  = "Python Programming Language"
+pkg.description  = "Python Module"
 pkg.help         = [[
 SymPy is a Python library for symbolic mathematics. It aims to become
 a full-featured computer algebra system (CAS) while keeping the

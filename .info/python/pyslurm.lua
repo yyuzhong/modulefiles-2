@@ -8,7 +8,7 @@ pkg.category     = "development"
 pkg.keywords     = "language"
 pkg.url          = "https://github.com/gingergeeks/pyslurm"
 pkg.license      = "BSD"
-pkg.description  = "Python Programming Language"
+pkg.description  = "Python Module"
 pkg.help         = [[
 Python module for interacting with SLURM.
 ]]

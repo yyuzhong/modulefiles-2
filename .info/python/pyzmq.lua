@@ -3,15 +3,15 @@
 
 local pkg = {}
 
-pkg.display_name = "numpy"
+pkg.display_name = "pyzmq"
 pkg.category     = "development"
 pkg.keywords     = "language"
-pkg.url          = "http://www.numpy.org/"
+pkg.url          = "https://github.com/zeromq/pyzmq"
 pkg.license      = "BSD"
 pkg.description  = "Python Module"
 pkg.help         = [[
-The fundamental package for numerical computation. It defines the
-numerical array and matrix types and basic operations on them. 
+This package contains Python bindings for 0MQ.
+0MQ is a lightweight and fast messaging implementation.
 ]]
 
 return pkg

@@ -8,7 +8,7 @@ pkg.category     = "development"
 pkg.keywords     = "language"
 pkg.url          = "http://pandas.pydata.org/"
 pkg.license      = "BSD"
-pkg.description  = "Python Programming Language"
+pkg.description  = "Python Module"
 pkg.help         = [[
 Python Data Analysis Library
 Pandas is an open source, BSD-licensed library providing high-performance,

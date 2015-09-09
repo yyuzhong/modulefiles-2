@@ -8,7 +8,7 @@ pkg.category     = "development"
 pkg.keywords     = "language"
 pkg.url          = "http://www.h5py.org/"
 pkg.license      = "BSD"
-pkg.description  = "Python Programming Language"
+pkg.description  = "Python Module"
 pkg.help         = [[
 The h5py package provides both a high- and low-level interface to the
 HDF5 library from Python. The low-level interface is intended to be

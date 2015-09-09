@@ -8,7 +8,7 @@ pkg.category     = "development"
 pkg.keywords     = "language"
 pkg.url          = "http://jswhit.github.io/pyproj/"
 pkg.license      = "BSD"
-pkg.description  = "Python Programming Language"
+pkg.description  = "Python Module"
 pkg.help         = [[
 Cython wrapper to provide python interfaces to PROJ.4
 (http://trac.osgeo.org/proj/) functions.

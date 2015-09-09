@@ -8,7 +8,7 @@ pkg.category     = "development"
 pkg.keywords     = "language"
 pkg.url          = "http://matplotlib.org/basemap/"
 pkg.license      = "BSD"
-pkg.description  = "Python Programming Language"
+pkg.description  = "Python Module"
 pkg.help         = [[
 The matplotlib basemap toolkit is a library for plotting 2D data on maps
 in Python. It is similar in functionality to the matlab mapping toolbox,

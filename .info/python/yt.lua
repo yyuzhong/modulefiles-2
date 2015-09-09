@@ -8,7 +8,7 @@ pkg.category     = "development"
 pkg.keywords     = "language"
 pkg.url          = "http://yt-project.org/"
 pkg.license      = "BSD"
-pkg.description  = "Python Programming Language"
+pkg.description  = "Python Module"
 pkg.help         = [[
 yt is a community-developed analysis and visualization toolkit for
 volumetric data. yt has been applied mostly to astrophysical simulation

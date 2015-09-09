@@ -8,7 +8,7 @@ pkg.category     = "development"
 pkg.keywords     = "language"
 pkg.url          = "https://github.com/pydata/numexpr"
 pkg.license      = "MIT"
-pkg.description  = "Python Programming Language"
+pkg.description  = "Python Module"
 pkg.help         = [[
 Numexpr is a fast numerical expression evaluator for NumPy. With it,
 expressions that operate on arrays (like "3*a+4*b") are accelerated and
